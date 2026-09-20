@@ -131,61 +131,56 @@
     <section class="mb-16">
       <h2 class="text-2xl font-bold mb-6 text-indigo-300 flex items-center gap-2">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-        3. STS Brain Comparison: Gemini Multimodal Live vs OpenAI Realtime
+        3. STS Brain Comparison: Gemini 3.8 Live vs GPT-Live 1
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Gemini Live -->
-        <div class="bg-slate-800/60 p-6 rounded-xl border border-slate-700/60">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-blue-400">Google Gemini Multimodal Live API</h3>
-            <span class="text-xs bg-blue-500/20 text-blue-300 px-2.5 py-1 rounded">Native Multimodal</span>
-          </div>
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-start gap-2">
-              <span class="text-blue-400 mt-1">•</span>
-              <div><strong>Architecture:</strong> Native Audio-to-Audio processing (zero intermediate text conversion latency).</div>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-blue-400 mt-1">•</span>
-              <div><strong>Multi-language Proficiency:</strong> Outstanding support for <strong>Japanese</strong>, <strong>English</strong>, and <strong>Vietnamese</strong> with natural phonetic inflection.</div>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-blue-400 mt-1">•</span>
-              <div><strong>Barge-in / Interruption:</strong> Native handling of user interruptions during avatar speech.</div>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-blue-400 mt-1">•</span>
-              <div><strong>Cost Efficiency:</strong> Competitive pricing per 1M audio tokens (significantly cheaper for long sessions).</div>
-            </li>
-          </ul>
-        </div>
-
-        <!-- OpenAI Realtime -->
-        <div class="bg-slate-800/60 p-6 rounded-xl border border-slate-700/60">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-emerald-400">OpenAI Realtime API (GPT-4o/Live)</h3>
-            <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded">Native Multimodal</span>
-          </div>
-          <ul class="space-y-3 text-sm text-slate-300">
-            <li class="flex items-start gap-2">
-              <span class="text-emerald-400 mt-1">•</span>
-              <div><strong>Architecture:</strong> Direct Speech-to-Speech WebSocket connection with expressiveness control.</div>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-emerald-400 mt-1">•</span>
-              <div><strong>Multi-language Proficiency:</strong> Fluent in English & Japanese; Vietnamese accent is clear, though Gemini exhibits slightly superior tone accuracy in casual dialect.</div>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-emerald-400 mt-1">•</span>
-              <div><strong>Function Calling:</strong> Robust tool use execution during live audio conversation.</div>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-emerald-400 mt-1">•</span>
-              <div><strong>Cost Structure:</strong> ~$0.06/min for input audio + ~$0.24/min for output audio.</div>
-            </li>
-          </ul>
-        </div>
+      <p class="text-sm text-slate-400 mb-6">Official model capabilities and USD pricing checked on September 20, 2026. OpenAI's GPT-Live 1 uses the Live API.</p>
+      <div class="overflow-x-auto rounded-xl border border-slate-700/60">
+        <table class="w-full text-sm text-left text-slate-300">
+          <caption class="sr-only">Gemini 3.8 Live and OpenAI GPT-Live 1 capabilities, tool calling, and costs</caption>
+          <thead class="bg-slate-800 text-white">
+            <tr>
+              <th scope="col" class="p-4">Feature</th>
+              <th scope="col" class="p-4 text-blue-400">Google Gemini 3.8 Live<br><code class="text-xs font-normal">gemini-3.8-live</code></th>
+              <th scope="col" class="p-4 text-emerald-400">OpenAI GPT-Live 1<br><code class="text-xs font-normal">gpt-live-1</code></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-700/60 bg-slate-800/40">
+            <tr>
+              <th scope="row" class="p-4 align-top text-white">Voice &amp; modalities</th>
+              <td class="p-4 align-top">Native audio dialogue with interleaved reasoning. Accepts text, audio, images, and video; returns audio with optional output transcription.</td>
+              <td class="p-4 align-top">Full-duplex voice: listens while speaking and handles interruptions. Supports text and audio input/output; no image or video input.</td>
+            </tr>
+            <tr>
+              <th scope="row" class="p-4 align-top text-white">Tool calling</th>
+              <td class="p-4 align-top">Function calling with asynchronous, non-blocking execution by default; blocking execution is optional. Supports scheduling tool responses and Google Search grounding.</td>
+              <td class="p-4 align-top">Delegates reasoning and tools to a Responses backend or your own application workflow. Managed delegation supports custom functions, web search, and parallel tool calls; your application executes custom functions. Speech and backend work proceed independently.</td>
+            </tr>
+            <tr>
+              <th scope="row" class="p-4 align-top text-white">Audio cost</th>
+              <td class="p-4 align-top"><strong>$3 / 1M input audio tokens</strong> and <strong>$12 / 1M output audio tokens</strong>. Published audio equivalents: $0.005 per input minute and $0.018 per output minute.</td>
+              <td class="p-4 align-top"><strong>$0.05 per session minute</strong>, billed per second without rounding up to whole minutes. Backend model and tool usage are billed separately.</td>
+            </tr>
+            <tr>
+              <th scope="row" class="p-4 align-top text-white">Other usage costs</th>
+              <td class="p-4 align-top">Per 1M tokens: text input $0.75, text output $4.50, image/video input $1.00. Search grounding: 5,000 free requests/month shared across Gemini 3.x, then $14 / 1,000 requests.</td>
+              <td class="p-4 align-top">Delegated Responses calls use the configured backend model's normal token rates and applicable tool fees, on top of the voice session charge.</td>
+            </tr>
+            <tr>
+              <th scope="row" class="p-4 align-top text-white">Illustrative audio budget</th>
+              <td class="p-4 align-top">10 minutes of input audio + 5 minutes of output audio ≈ <strong>$0.14</strong>, using Google's published per-minute equivalents. Excludes text, video, search, and other usage.</td>
+              <td class="p-4 align-top">A 10-minute session costs <strong>$0.50</strong> for voice, plus backend model and tool charges.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <p class="text-xs text-slate-400 mt-4">Budget examples are estimates with different billing units: Gemini depends on actual token usage; GPT-Live depends on session duration. Avatar rendering and LiveKit infrastructure are additional costs for both. Evaluate English, Japanese, and Vietnamese speech quality on your own conversations before choosing a provider.</p>
+      <p class="text-xs text-slate-400 mt-3">
+        Sources:
+        <a class="text-blue-400 underline" href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live">Gemini model documentation</a> ·
+        <a class="text-blue-400 underline" href="https://ai.google.dev/gemini-api/docs/pricing">Gemini pricing</a> ·
+        <a class="text-emerald-400 underline" href="https://developers.openai.com/api/docs/models/gpt-live-1">GPT-Live model and pricing</a> ·
+        <a class="text-emerald-400 underline" href="https://developers.openai.com/api/docs/guides/live-delegation">GPT-Live delegation and tools</a>
+      </p>
     </section>
 
     <!-- LiveKit Deployment in Japan -->
@@ -254,6 +249,81 @@
       </div>
     </section>
 
+    <!-- Knowledge Base Setup -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6 text-indigo-300">5. Knowledge Base Setup: Ingestion &amp; Retrieval</h2>
+      <p class="text-sm text-slate-300 mb-6">The MVP must answer questions about the company using approved company documentation, including its overview, products, services, and FAQs. Choose the retrieval approach based on the size and complexity of the knowledge base (KB).</p>
+
+      <div class="bg-slate-800/60 p-6 rounded-xl border border-slate-700/60 mb-6">
+        <h3 class="text-lg font-bold text-white mb-3">Shared Document Ingestion Pipeline</h3>
+        <p class="text-sm text-slate-300 mb-3">Both approaches need a repeatable pipeline: collect source documents → extract text (OCR when needed) → clean and deduplicate → organize content with source references and update timestamps → review → publish a versioned KB.</p>
+        <p class="text-sm text-slate-400">Track source changes and deletions so published knowledge stays current. Preserve document identity and provenance through ingestion, and prepare a representative set of company questions with expected answers to evaluate retrieval.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-slate-800/60 p-6 rounded-xl border border-slate-700/60">
+          <h3 class="text-lg font-bold text-blue-400 mb-3">Small KB: OKF Pages + Progressive Disclosure</h3>
+          <p class="text-sm text-slate-300 mb-4">Store a few curated company pages in <a class="text-blue-400 underline" href="https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing">Open Knowledge Format (OKF)</a>: Markdown files with YAML frontmatter and links between related pages. An <code>index.md</code> provides the entry point.</p>
+          <ol class="list-decimal list-inside space-y-3 text-sm text-slate-300">
+            <li><strong>Ingest:</strong> Convert approved documents into topic pages such as company overview, products, and FAQs; generate an index with short descriptions and page paths.</li>
+            <li><strong>Retrieve:</strong> Feed only the index into the AI's context initially. On a company question, the AI calls <code>read_kb_page(path)</code> to fetch relevant pages and follows links only when more detail is needed.</li>
+            <li><strong>Maintain:</strong> Republish changed pages and refresh the index when topics change. No embedding model or vector index is required.</li>
+          </ol>
+          <p class="text-xs text-slate-400 mt-4">Best when the index is compact and topics are easy to navigate. Progressive disclosure limits initial context, but multiple page reads can add voice-response latency.</p>
+        </div>
+
+        <div class="bg-slate-800/60 p-6 rounded-xl border border-slate-700/60">
+          <h3 class="text-lg font-bold text-emerald-400 mb-3">Large KB: Semantic Search with Embeddings</h3>
+          <ol class="list-decimal list-inside space-y-3 text-sm text-slate-300">
+            <li><strong>Ingest:</strong> Split normalized documents into meaningful chunks, retain source metadata, generate embeddings with a model evaluated for English, Japanese, and Vietnamese, and store vectors in a searchable index.</li>
+            <li><strong>Retrieve:</strong> The AI calls <code>search_kb(query)</code>. Embed the query with the same embedding model/version as the indexed chunks, search for relevant passages, and return a bounded set of excerpts with source references.</li>
+            <li><strong>Maintain:</strong> Re-embed changed or new chunks and remove deleted content. Changing the embedding model requires rebuilding the vector index; changes to chunking can also require reprocessing and re-embedding.</li>
+          </ol>
+          <p class="text-xs text-slate-400 mt-4">More ingestion and operational complexity, plus embedding and index costs. In the next phase, add full-text search and combine keyword and semantic results for hybrid retrieval, especially for exact product names and identifiers.</p>
+        </div>
+      </div>
+
+      <div class="mt-6 bg-indigo-900/20 p-5 rounded-xl border border-indigo-500/30">
+        <h3 class="font-bold text-indigo-300 mb-2">Connect Retrieval to the STS Conversation</h3>
+        <p class="text-sm text-slate-300">Expose the selected retrieval tools through Gemini's function calling or GPT-Live's delegated backend. The backend reads pages or searches the index and returns grounded content for the spoken answer. Keep retrieved content within a context budget and retain source references in the transcript. If the KB does not contain an answer, the AI should say so and offer a company contact instead of inventing facts.</p>
+      </div>
+    </section>
+
+    <!-- MVP Timeline -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold mb-6 text-indigo-300">6. MVP Timeline: 5 Weeks</h2>
+      <div class="overflow-x-auto rounded-xl border border-slate-700/60">
+        <table class="w-full text-sm text-left text-slate-300">
+          <caption class="sr-only">Five-week MVP delivery plan with activities and milestones</caption>
+          <thead class="bg-slate-800 text-white">
+            <tr>
+              <th scope="col" class="p-4">Schedule</th>
+              <th scope="col" class="p-4">Activities</th>
+              <th scope="col" class="p-4">Exit Milestone</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-700/60 bg-slate-800/40">
+            <tr>
+              <th scope="row" class="p-4 align-top text-indigo-300">Weeks 1–2<br><span class="font-normal text-slate-400">2 weeks</span></th>
+              <td class="p-4 align-top">Try <strong>LiveKit Cloud</strong>; experiment with <strong>Gemini 3.8 Live</strong> and <strong>OpenAI GPT-Live 1</strong>; evaluate <strong>Simli, LemonSlice, and Tavus</strong>. Compare integration feasibility, voice quality, interruptions, lip sync, latency, and total cost.</td>
+              <td class="p-4 align-top">Choose the STS model and avatar/lip-sync provider using the same English, Japanese, and Vietnamese test conversations; demonstrate the selected live conversation pipeline.</td>
+            </tr>
+            <tr>
+              <th scope="row" class="p-4 align-top text-indigo-300">Weeks 3–4<br><span class="font-normal text-slate-400">2 weeks</span></th>
+              <td class="p-4 align-top">Set up company-document ingestion and the chosen KB approach: OKF pages for a small corpus or semantic search for a large corpus. Connect retrieval tool calling to the selected STS stack.</td>
+              <td class="p-4 align-top">AI answers company questions from retrieved sources, handles missing answers, and reflects document updates and deletions. Full-text/hybrid search remains a next-phase enhancement.</td>
+            </tr>
+            <tr>
+              <th scope="row" class="p-4 align-top text-indigo-300">Week 5<br><span class="font-normal text-slate-400">1 week</span></th>
+              <td class="p-4 align-top">Run end-to-end tests and QA across voice, retrieval, and avatar rendering. Check answer accuracy, language quality, lip sync, interruptions, retrieval timeouts, session recovery, and cost.</td>
+              <td class="p-4 align-top">Resolve blocking defects and complete a stakeholder-reviewed MVP demo with documented QA results and remaining limitations.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-slate-400 mt-4">Planning assumption: provider access and approved company documents are available at kickoff. Confirm corpus size during weeks 1–2 so the KB work fits the following two-week window.</p>
+    </section>
+
     <!-- Final Recommendation -->
     <section class="bg-gradient-to-r from-indigo-900/60 to-slate-800/80 p-8 rounded-2xl border border-indigo-500/30">
       <h2 class="text-2xl font-bold text-white mb-3">Architectural Recommendation Summary</h2>
@@ -262,8 +332,10 @@
       </p>
       <ol class="list-decimal list-inside space-y-2 text-sm text-slate-200 font-medium">
         <li><strong>Orchestrator:</strong> Use <strong>LiveKit Cloud (Tokyo Region)</strong> to bypass WebRTC infrastructure complexity during MVP phase.</li>
-        <li><strong>STS Brain:</strong> Primary with <strong>Gemini Multimodal Live API</strong> (superior Japanese/Vietnamese phonetic quality and lower token cost), with fallback to <strong>OpenAI Realtime API</strong>.</li>
-        <li><strong>Avatar Engine:</strong> Start with <strong>Simli</strong> (1 photo, lowest cost/latency) or <strong>LemonSlice</strong> (if full upper-body gesture actions are needed).</li>
+        <li><strong>STS Brain:</strong> Evaluate <strong>Gemini 3.8 Live</strong> for multimodal input and usage-based audio pricing, and <strong>OpenAI GPT-Live 1</strong> for full-duplex voice with delegated backend tools. Select the primary and fallback after measuring language quality, latency, and total session cost.</li>
+        <li><strong>Avatar Engine:</strong> Experiment with <strong>Simli, LemonSlice, and Tavus</strong> during weeks 1–2, then select the provider based on integration feasibility, lip-sync quality, latency, and cost.</li>
+        <li><strong>Company Knowledge:</strong> Build a document ingestion pipeline for either approach. Start with <strong>OKF pages and progressive disclosure</strong> for a small KB; use <strong>semantic retrieval with embeddings</strong> for a large KB, including re-embedding on content changes. Connect retrieval through STS tool calling; consider full-text/hybrid search in the next phase.</li>
+        <li><strong>Delivery:</strong> Plan a <strong>5-week MVP</strong>: 2 weeks of provider experiments and selection, 2 weeks of KB ingestion and retrieval integration, and 1 week of end-to-end testing and QA.</li>
       </ol>
     </section>
 
